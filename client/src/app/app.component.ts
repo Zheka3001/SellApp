@@ -1,23 +1,25 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, inject, OnInit } from '@angular/core';
+import { User } from './_models/user';
+import { AccountService } from './_services/account.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   standalone: false,
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
 })
-export class AppComponent implements OnInit  {
-  private http = inject(HttpClient);
+export class AppComponent implements OnInit {
+  private accountService = inject(AccountService);
 
   title = 'Sell App';
-  users: any;
+
+  setCurrentUser() {
+    const user: User = JSON.parse(localStorage.getItem('user') ?? '{}') as User;
+    this.accountService.setCurrentUser(user);
+  }
 
   ngOnInit(): void {
-    this.http.get("https://localhost:5001/api/users").subscribe(response => {
-      this.users = response
-    }, error => {
-      console.log(error)
-    })
+    this.setCurrentUser();
   }
 }
