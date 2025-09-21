@@ -1,4 +1,5 @@
 ﻿using API.Extensions;
+using API.Middleware;
 using Microsoft.OpenApi.Models;
 
 namespace API
@@ -29,15 +30,7 @@ namespace API
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-                app.UseSwaggerUI(options =>
-                {
-                    options.SwaggerEndpoint("/swagger/v1/swagger.json", "WebApiv5 v1");
-                    options.RoutePrefix = String.Empty;
-                });
-            }
+            app.UseMiddleware<ExceptionMiddleware>();
 
             app.UseHttpsRedirection();
             app.UseRouting();
