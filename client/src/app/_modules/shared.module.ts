@@ -4,6 +4,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ToastrModule } from 'ngx-toastr';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { GalleryComponent } from '@daelmaak/ngx-gallery';
+import { FileUploadModule } from 'ng2-file-upload';
 
 @NgModule({
   declarations: [],
@@ -15,7 +16,14 @@ import { GalleryComponent } from '@daelmaak/ngx-gallery';
     }),
     TabsModule.forRoot(),
     GalleryComponent,
+    FileUploadModule,
   ],
-  exports: [BsDropdownModule, ToastrModule, TabsModule, GalleryComponent],
+  exports: [
+    BsDropdownModule,
+    ToastrModule,
+    TabsModule,
+    GalleryComponent,
+    FileUploadModule,
+  ],
 })
 export class SharedModule {}
